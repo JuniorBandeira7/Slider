@@ -1,58 +1,30 @@
-#div-da-foto{
+#dvslider{
+    width: 1000px;
+    height: 500px;
+    border: 1px solid #000;
+    overflow: hidden no-repeat;
+    background-size: cover;
     display: flex;
     justify-content: space-between;
-    width: 972px;
-    height: 752px;
-    margin-left: -25px;
-}
-#a{
-    width: 100%;
-    height: 100%;
-}
-.voltar{
-    background-color: rgba(0, 0, 0, 0.24);
-    height: 100%; 
-    width: 5%;
-}
-.avancar{
-    background-color: rgba(0, 0, 0, 0.24);
-    width: 5%;
-    height: 100%;     
-}
-.botao-av{
-    width: 50px;
-    height: 100%;
-    background: none;
-    border: none;
-    background-color: rgb(6, 59, 105, .1);
-}
-#btf{
-    background-image: url(KEY0.CC-Free-Png-Download-Slider-Arrow-Icon-Png-Imagens-de-Fundo-Botão-da-Seta-Esquerda-Direita-Png\ \(1\).png);
-}
-#btt{
-    background-image: url(KEY0.CC-Free-Png-Download-Slider-Arrow-Icon-Png-Imagens-de-Fundo-Botão-da-Seta-Esquerda-Direita-Png\ \(2\).png);
-}
-.bt{
-    background: none;
-    border: none;
-    border-radius: 50px;
-    background-color: rgb(255, 255, 255);
-    margin-left: 5px;
-    margin-top: 5px;
-}
-.bt:hover{
-    background-color: rgb(4, 9, 250);
-}
-.botoes-das-imagens{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-#section-da-foto{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
     align-items: center;
+    transition: 0.2s;
 }
-
+.btSlider{
+    background-color: rgba(0, 0, 0, 0.4);
+    height: 100%;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+#dvLoad{
+    width: 100%;
+    height: 5px;
+    margin-top: 49%;
+    border: 1px solid rgba(255, 255, 255, 0.3)
+}
+#dvBarra{
+    width: 0%;
+    height: 100%;
+    background-color: #ff0000;
+}

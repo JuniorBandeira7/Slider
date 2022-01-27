@@ -1,80 +1,55 @@
-/*Codigo que faz a mudança de imagens. A cada mudança, é mudado, atraves do "setAttribute", o "onclick" dos botoes que alteram as fotos, para frente ou para tras. Esse mudança
-        é baseada num contador que começa no zero que é acrescido ou decrescido dependendo se a foto é mudada para frente ou para tras. Cada foto corresponde a um número de 0 até o 
-        número total de fotos menos 1*/
-        let contador = 0
-        function MudarFotoFrente(){
-            if(contador == 0){
-                document.getElementById("a").src ="FotosFullHD/Tela de loguin.png"
-            }
-            contador = contador + 1
-            document.getElementById("a-da-foto").setAttribute("href", "https://github.com/JuniorBandeira7/Tela-de-loguin")
-            document.getElementById("btf").setAttribute("onclick", "MudarFotoFrente1()")
-            document.getElementById("btt").setAttribute("onclick", "MudarFotoTras1()")
+var imgs=[]
+    var slider
+    var imgAtual
+    var maxImg
+    var tmp
+    var vtempo
+    var vload
+    var tempoTroca
+
+    function preCarregamento(){
+        var s=1
+        for(var i=0;i<3;i++){
+        imgs[i]=new Image()
+        imgs[i].src="imgs/s"+s+".jpg"//a posição "i" do vetor recebe "src="imgs/s"+s+".jpg""
+        s++
         }
-        function MudarFotoFrente1(){
-            if(contador == 1){
-                document.getElementById("a").src ="FotosFullHD/Primeiro front end.png"
-            }
-            contador = contador + 1
-            document.getElementById("a-da-foto").setAttribute("href", "https://github.com/JuniorBandeira7/Meu-primeiro-site-apenas-front-end-")
-            document.getElementById("btf").setAttribute("onclick", "MudarFotoFrente2()")
-            document.getElementById("btt").setAttribute("onclick", "MudarFotoTras2()")
+    }
+
+    function carregar(img){
+        slider.style.backgroundImage="url('"+imgs[img].src+"')"//aqui chama o vetor imgs, na posição "img", recebendo o "src"
+    }
+
+    function inicia(){
+        preCarregamento()
+        imgAtual=0
+        maxImg=imgs.length-1
+        slider=document.getElementById("dvslider")
+        vload=document.getElementById("dvBarra")
+        carregar(imgAtual)
+        tempoTroca=0
+        anima()
+    }
+
+    function troca(dir){//parametro "dir" de direção. se clicar no botao de volta ele recebe -1, caso clica no avançar recebe 1
+        tempoTroca=0//quando muda a imagem o tempo de mudar a foto automatico zera, seja clicando no botao, ou esperando
+        imgAtual+=dir
+        if(imgAtual>maxImg){
+            imgAtual=0
+        }else if(imgAtual<0){
+            imgAtual=maxImg
         }
-        function MudarFotoFrente2(){
-            if(contador == 2){
-                document.getElementById("a").src ="FotosFullHD/Contador de dias.png"
-            }
-            contador = 0
-            document.getElementById("a-da-foto").setAttribute("href", "https://github.com/JuniorBandeira7/Contador-de-dias")
-            document.getElementById("btf").setAttribute("onclick", "MudarFotoFrente()")
-            document.getElementById("btt").setAttribute("onclick", "MudarFotoTras()")
+        carregar(imgAtual)
+    }
+    function anima(){
+        tempoTroca++
+        if(tempoTroca >= 500){
+            tempoTroca=0
+            troca(1)//quando zero o tempo avança um slide
         }
-        function MudarFotoTras(){
-            if(contador == 0){
-                document.getElementById("a").src ="FotosFullHD/Primeiro front end.png"
-            }
-            contador = 2
-            document.getElementById("a-da-foto").setAttribute("href", "https://github.com/JuniorBandeira7/Meu-primeiro-site-apenas-front-end-")
-            document.getElementById("btf").setAttribute("onclick", "MudarFotoFrente2()")
-            document.getElementById("btt").setAttribute("onclick", "MudarFotoTras2()")
-        }
-        function MudarFotoTras2(){
-            if(contador == 2){
-                document.getElementById("a").src ="FotosFullHD/Tela de loguin.png"
-            }
-            contador = contador - 1
-            document.getElementById("a-da-foto").setAttribute("href", "https://github.com/JuniorBandeira7/Tela-de-loguin")
-            document.getElementById("btf").setAttribute("onclick", "MudarFotoFrente1()")
-            document.getElementById("btt").setAttribute("onclick", "MudarFotoTras1()")
-        }
-        function MudarFotoTras1(){
-            if(contador == 1){
-                document.getElementById("a").src ="FotosFullHD/Contador de dias.png"
-            }
-            contador = contador - 1
-            document.getElementById("a-da-foto").setAttribute("href", "https://github.com/JuniorBandeira7/Contador-de-dias")
-            document.getElementById("btf").setAttribute("onclick", "MudarFotoFrente()")
-            document.getElementById("btt").setAttribute("onclick", "MudarFotoTras()")
-        }
-        function Bt(){
-            document.getElementById("a").src ="FotosFullHD/Contador de dias.png"
-            contador = 0
-            document.getElementById("a-da-foto").setAttribute("href", "https://github.com/JuniorBandeira7/Contador-de-dias")
-            document.getElementById("btf").setAttribute("onclick", "MudarFotoFrente()")
-            document.getElementById("btt").setAttribute("onclick", "MudarFotoTras()")
-        }
-        function Bt1(){
-            document.getElementById("a").src ="FotosFullHD/Tela de loguin.png"
-            contador = 1
-            document.getElementById("a-da-foto").setAttribute("href", "https://github.com/JuniorBandeira7/Tela-de-loguin")
-            document.getElementById("btf").setAttribute("onclick", "MudarFotoFrente1()")
-            document.getElementById("btt").setAttribute("onclick", "MudarFotoTras1()")
-        }
-        function Bt2(){
-            document.getElementById("a").src ="FotosFullHD/Primeiro front end.png"
-            contador = 2
-            document.getElementById("a-da-foto").setAttribute("href", "https://github.com/JuniorBandeira7/Meu-primeiro-site-apenas-front-end-")
-            document.getElementById("btf").setAttribute("onclick", "MudarFotoFrente2()")
-            document.getElementById("btt").setAttribute("onclick", "MudarFotoTras2()")
-        }
-        
+        vtempo=tempoTroca/5//1% de 500. a barrinha vai enchendo de 1 em 1%
+        vload.style.width=vtempo+"%"
+        window.requestAnimationFrame(anima)
+    }
+   
+    window.addEventListener("load",inicia)
